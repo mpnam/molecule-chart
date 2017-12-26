@@ -10,16 +10,16 @@ Sample project to demonstrate how to show chart and interact with it using REACT
 
 #### Chart input
 ```json
-{
-  [
+[
+  {
     "className": "Class A",
     "color": "#1C2833",
     "data": [
       { "x": 100, "y": 200, "z": 1},
       { "x": 120, "y": 100, "z": 2},
       { "x": 170, "y": 300, "z": 3}
-  ]
-}
+  }
+]
 ```
 Please specify class's color using Hex color codes. 
 Z axis represents keys which are used to find its chemical graphic.
