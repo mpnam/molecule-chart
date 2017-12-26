@@ -18,6 +18,7 @@ Sample project to demonstrate how to show chart and interact with it using REACT
       { "x": 100, "y": 200, "z": 1},
       { "x": 120, "y": 100, "z": 2},
       { "x": 170, "y": 300, "z": 3}
+    ]
   }
 ]
 ```
