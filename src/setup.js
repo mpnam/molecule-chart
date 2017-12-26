@@ -41,9 +41,7 @@ const chartSample = [
   }
 ];
 
-const databaseSample = [{
-	"k1": {"a":[{"x":0,"y":-0.2633,"i":"a0","l":"O"},{"x":-0.8109999999999999,"y":0.2633,"i":"a1","l":"H"},{"x":0.8109999999999999,"y":0.2633,"i":"a2","l":"H"}],"b":[{"b":0,"e":1,"i":"b0"},{"b":0,"e":2,"i":"b1"}]}
-}];
+const databaseSample = [{"file":"MDL MOLFiles content"}];
 
 export default class Setup extends Component {
   constructor(props) {
@@ -152,14 +150,12 @@ export default class Setup extends Component {
   }
 
   _chartHandler = (accept, reject) => {
-    console.log(reject);
     if (accept.length > 0) {
       this._readerHandler(accept[0], true);
     }
   }
   
   _databaseHandler = (accept, reject) => {
-    console.log(reject);
     if (accept.length > 0) {
       this._readerHandler(accept[0], false);
     }
@@ -175,7 +171,7 @@ export default class Setup extends Component {
         if (error === "")
           this._chartContentChanged(reader.result);
       } else {
-        error = validateChart(reader.result);
+        error = validateDatabase(reader.result);
         if (error === "")
           this._databaseContentChanged(reader.result);
       }

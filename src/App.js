@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Header, Message, Icon, Button } from 'semantic-ui-react';
+import { Message, Icon, Button } from 'semantic-ui-react';
 import NotificationSystem from 'react-notification-system';
 
 // components
@@ -74,10 +74,9 @@ class App extends Component {
       return;
     }
 
-      console.log("test", JSON.parse(this.state.database));
     this.setState({
       classes: JSON.parse(this.state.chart),
-      data: JSON.parse(this.state.database)
+      data: (this.state.database !== "")? JSON.parse(this.state.database) : {}
     });
   }
 }

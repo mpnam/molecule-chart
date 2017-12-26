@@ -8,19 +8,25 @@ import {
   Legend,
   XAxis, 
   YAxis, 
-  ZAxis, 
-  ReferenceLine, 
-  ReferenceDot, 
-  ReferenceArea
+  ZAxis
 } from 'recharts';
+
+// components
+import Viewer from './viewer';
 
 
 export default class Chart extends Component {
-  _renderClass = (item, index) => {
-    return <Scatter key={index} name={item.className} data={item.data} fillOpacity={0.3} fill={item.color} />
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      molecule: undefined,
+      key: undefined
+    };
   }
 
-  componentDidMount() {
+  _renderClass = (item, index) => {
+    return <Scatter key={index} name={item.className} data={item.data} fillOpacity={0.3} fill={item.color} onClick={this._pointClicked} />
   }
 
   render() {
@@ -47,12 +53,33 @@ export default class Chart extends Component {
               </Header.Content>
             </Header>
               <center>
-                <canvas className="ChemDoodleWebComponent" id="transformDistance">This browser does not support HTML5/Canvas.</canvas>
+                {(this.state.molecule !== undefined)?
+                  <div>
+                    <Viewer molecule={this.state.molecule} key={this.state.key} />
+                    <canvas className="ChemDoodleWebComponent" id="transformDistance">This browser does not support HTML5/Canvas.</canvas>
+                  </div> : null
+                }
               </center>
             </Grid.Column>
           </Grid.Row>
         </Grid>
       </Segment>
     );
+  }
+
+  _pointClicked = (event) => {
+    if (event.node !== undefined) {
+      if (this.props.data !== undefined && this.props.data[event.node.z - 1] !== undefined) {
+        this.setState({
+          key: event.node.z - 1,
+          molecule: this.props.data[event.node.z - 1].file
+        });
+      } else {
+        this.setState({
+          molecule: undefined,
+          key: undefined
+        });
+      }
+    }
   }
 }
